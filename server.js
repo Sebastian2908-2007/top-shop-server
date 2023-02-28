@@ -10,6 +10,11 @@ var cors = require('cors');
 const db = require('./config/connection');
 const { authMiddleware } = require('./utils/authorize');
 
+
+var corsOptions = {
+    origin: '*',
+    credentials: true
+  };
 /*port */
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -17,6 +22,7 @@ const app = express();
 /**make apolloserver function */
 const startServer = async () => {
     const server = new ApolloServer({
+        cors: corsOptions,
         typeDefs,
         resolvers,
         csrfPrevention: true,
@@ -27,7 +33,7 @@ const startServer = async () => {
     await server.start();
 
     /**apply express as middleware */
-    server.applyMiddleware({ app });
+    server.applyMiddleware({ app,cors: false  });
 
     /*log grapql url */
    console.log(`Use graphql at http://localhost:${PORT}${server.graphqlPath}`);
@@ -36,9 +42,9 @@ const startServer = async () => {
 
 startServer()
 
+app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(cors());
 
 
 
