@@ -10,11 +10,20 @@ var cors = require('cors');
 const db = require('./config/connection');
 const { authMiddleware } = require('./utils/authorize');
 
-
+var whitelist = ['https://topshop1188.herokuapp.com', 'https://topshop1188.herokuapp.com/addresscheckout']
 var corsOptions = {
-    origin: 'https://topshop1188.herokuapp.com',
-    credentials: true
-  };
+    origin: function (origin, callback) {
+        if (whitelist.indexOf(origin) !== -1) {
+          callback(null, true)
+        } else {
+          callback(new Error('Not allowed by CORS'))
+        }
+      },
+      credentials: true
+    }
+
+   
+  
 /*port */
 const PORT = process.env.PORT || 3001;
 const app = express();
