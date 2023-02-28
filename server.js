@@ -5,7 +5,7 @@ const { ApolloServer } = require('apollo-server-express');
 /**import schema stuff typedefs resolvers */
 const {typeDefs, resolvers} =require('./schemas');
 const path = require('path');
-
+var cors = require('cors');
 /*db connection */
 const db = require('./config/connection');
 const { authMiddleware } = require('./utils/authorize');
@@ -38,6 +38,7 @@ startServer()
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(cors());
 
 
 
