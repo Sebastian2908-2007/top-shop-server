@@ -25,8 +25,8 @@ const startServer = async () => {
         cors: corsOptions,
         typeDefs,
         resolvers,
-        csrfPrevention: true,
-        cache: 'bounded',
+        /*csrfPrevention: true,
+        cache: 'bounded',*/
         context: authMiddleware
     });
     /**start apollo server */
