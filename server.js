@@ -12,7 +12,7 @@ const { authMiddleware } = require('./utils/authorize');
 
 
 var corsOptions = {
-    origin: '*',
+    origin: 'https://topshop1188.herokuapp.com',
     credentials: true
   };
 /*port */
