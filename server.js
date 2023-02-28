@@ -25,15 +25,15 @@ const startServer = async () => {
         cors: corsOptions,
         typeDefs,
         resolvers,
-        csrfPrevention: true,
-        cache: 'bounded',
+        /*csrfPrevention: true,
+        cache: 'bounded',*/
         context: authMiddleware
     });
     /**start apollo server */
     await server.start();
 
     /**apply express as middleware */
-    server.applyMiddleware({ app,cors: false  });
+    server.applyMiddleware({ app, cors: false  });
 
     /*log grapql url */
    console.log(`Use graphql at http://localhost:${PORT}${server.graphqlPath}`);
